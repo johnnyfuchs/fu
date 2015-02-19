@@ -10,6 +10,7 @@
 #import "FUStarMap.h"
 #import "StarMapCollectionViewLayout.h"
 #import "StarCell.h"
+#import "FUCollectionView.h"
 
 //var starMap:StarMap
 //        var collectionView:UICollectionView
@@ -63,7 +64,7 @@
 
 
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
-@property (nonatomic) UICollectionView *collectionView;
+@property (nonatomic) FUCollectionView *collectionView;
 @property (nonatomic) FUStarMap *map;
 @end
 
@@ -74,9 +75,9 @@
     if (self) {
         self.map = FUStarMap.new;
         StarMapCollectionViewLayout *layout = [StarMapCollectionViewLayout layoutWithMap:self.map];
-        self.collectionView = [UICollectionView.alloc initWithFrame:CGRectZero collectionViewLayout:layout];
+        self.collectionView = [FUCollectionView.alloc initWithFrame:CGRectZero collectionViewLayout:layout];
         self.collectionView.dataSource = self;
-        self.collectionView.delegate = self;
+        self.collectionView.scrollDelegate = self;
         self.collectionView.pagingEnabled = YES;
         [self.collectionView registerClass:[StarCell class] forCellWithReuseIdentifier:@"starCell"];
     }
@@ -89,7 +90,13 @@
 
     self.collectionView.frame = self.view.bounds;
     self.map.viewport = CGRectMake(0, 0, self.view.bounds.size.width * 7, self.view.bounds.size.height * 7);
+    self.collectionView.contentOffset = self.viewPortCenterPoint;
     [self.view addSubview:self.collectionView];
+}
+
+- (CGPoint)viewPortCenterPoint {
+    CGPoint point = CGPointMake(self.map.viewport.size.width * 0.5f - self.collectionView.frame.size.width * 0.5f, self.map.viewport.size.height * 0.5f - self.collectionView.frame.size.height * 0.5f);
+    return point;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -103,7 +110,8 @@
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    NSLog(@"%@", NSStringFromCGPoint(*targetContentOffset));
+    BOOL topLeftLoad = (targetContentOffset->x < 10 || targetContentOffset->y < 10);
+    BOOL bottomRightLoad = (targetContentOffset->x > self.collectionView.contentSize.height - 10 || targetContentOffset->y > self.collectionView.contentSize.height - 10);
 }
 
 

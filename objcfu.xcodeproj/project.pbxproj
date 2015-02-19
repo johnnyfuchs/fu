@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		201E56DFE892DAFABF05A337 /* FUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 201E52D17E5B9321F33CC4D3 /* FUCollectionView.m */; };
 		B22552EF1A928A9F00478F12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B22552EE1A928A9F00478F12 /* main.m */; };
 		B22552F21A928A9F00478F12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B22552F11A928A9F00478F12 /* AppDelegate.m */; };
 		B22552F51A928A9F00478F12 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22552F41A928A9F00478F12 /* ViewController.m */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		201E52D17E5B9321F33CC4D3 /* FUCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUCollectionView.m; sourceTree = "<group>"; };
+		201E58051B71E9EF21A482B8 /* FUCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUCollectionView.h; sourceTree = "<group>"; };
 		B22552E91A928A9F00478F12 /* objcfu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = objcfu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B22552ED1A928A9F00478F12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B22552EE1A928A9F00478F12 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				BB2ED1B1BFACB133C5A887AA /* StarMapCollectionViewLayout.h */,
 				BB2ED606761A74F6D2A7CDC4 /* StarCell.m */,
 				BB2ED1825C309D9E3D73A820 /* StarCell.h */,
+				201E52D17E5B9321F33CC4D3 /* FUCollectionView.m */,
+				201E58051B71E9EF21A482B8 /* FUCollectionView.h */,
 			);
 			path = objcfu;
 			sourceTree = "<group>";
@@ -270,6 +275,7 @@
 				BB2ED1EFE7A473E798BAC6FF /* FURegion.m in Sources */,
 				BB2ED245AE7947BAF60305F3 /* StarMapCollectionViewLayout.m in Sources */,
 				BB2ED929540CA50A330C5048 /* StarCell.m in Sources */,
+				201E56DFE892DAFABF05A337 /* FUCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
