@@ -39,5 +39,12 @@
     return copy;
 }
 
+- (NSString *)description {
+    NSMutableString *description = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
+    [description appendFormat:@"x: %i, y: %i", self.x, self.y];
+    [description appendString:@">"];
+    return description;
+}
+
 
 @end

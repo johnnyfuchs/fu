@@ -5,6 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FUBody.h"
+#import <UIKit/UIKit.h>
 
 @class FURegion;
 
@@ -50,6 +51,7 @@ typedef enum {
 @interface FUStar : FUBody
 @property (nonatomic) FUStarType type;
 @property (nonatomic) FURegion *region;
+@property(nonatomic, strong) UIColor *color;
 
 + (instancetype) starWithMass:(NSUInteger)mass x:(NSUInteger)x y:(NSUInteger)y z:(NSUInteger)z type:(FUStarType)type;
 

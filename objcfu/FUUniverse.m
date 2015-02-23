@@ -30,10 +30,10 @@
             [FUStar starWithMass:0 x:100 y:100 z:0 type:FUStarTypeM],
             [FUStar starWithMass:0 x:120 y:190 z:0 type:FUStarTypeM],
             [FUStar starWithMass:0 x:180 y:80 z:0 type:FUStarTypeM],
-            [FUStar starWithMass:0 x:90 y:380 z:0 type:FUStarTypeM],
-            [FUStar starWithMass:0 x:480 y:480 z:0 type:FUStarTypeM],
-            [FUStar starWithMass:0 x:80 y:280 z:0 type:FUStarTypeM],
-            [FUStar starWithMass:0 x:480 y:0 z:0 type:FUStarTypeM],
+            [FUStar starWithMass:0 x:90 y:180 z:0 type:FUStarTypeM],
+            [FUStar starWithMass:0 x:280 y:180 z:0 type:FUStarTypeM],
+            [FUStar starWithMass:0 x:80 y:150 z:0 type:FUStarTypeM],
+            [FUStar starWithMass:0 x:280 y:0 z:0 type:FUStarTypeM],
     ];
 }
 

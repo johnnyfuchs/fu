@@ -20,6 +20,13 @@
     return star;
 }
 
+- (UIColor *)color {
+    CGFloat hue = (self.region.x + 8.) / 16.;
+    CGFloat sat = (self.region.y + 8.) / 16.;
+    return [UIColor colorWithHue:hue saturation:sat brightness:.8 alpha:1];
+}
+
+
 - (BOOL)isEqual:(id)other {
     if (other == self)
         return YES;

@@ -93,7 +93,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.regionSize = CGSizeMake(500, 500);
+        self.regionSize = CGSizeMake(300, 300);
         self.originRegion = [FURegion regionX:0 y:0];
         self.universe = FUUniverse.new;
         self.regionStars = NSMutableDictionary.new;
@@ -157,6 +157,12 @@
     }
     return stars;
 }
+
+- (void)setViewport:(CGRect)viewport {
+    _viewport = viewport;
+    self.viewportStars = nil;
+}
+
 
 - (FUStar *)starAtIndexPath:(NSIndexPath *)path {
     NSArray *stars = [self starsInViewport];
