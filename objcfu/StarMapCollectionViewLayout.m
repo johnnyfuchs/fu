@@ -92,9 +92,10 @@
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     FUStar *star = [self.map starAtIndexPath:indexPath];
-    CGFloat originX = star.x + star.region.x * self.map.regionSize.width;
-    CGFloat originY = star.y + star.region.y * self.map.regionSize.height;
+    CGFloat originX = star.x + (star.region.x * self.map.regionSize.width);
+    CGFloat originY = star.y + (star.region.y * self.map.regionSize.height);
     attributes.frame = CGRectMake(originX, originY, 20, 20);
+    NSLog(@"star: %@ attr: %@", attributes, star);
     return attributes;
 }
 

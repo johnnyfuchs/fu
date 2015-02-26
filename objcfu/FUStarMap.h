@@ -13,9 +13,9 @@
 
 @interface FUStarMap : NSObject
 
+@property (nonatomic, readonly) CGSize regionSize;
+
 @property (nonatomic) CGRect viewport;
-@property (nonatomic) CGSize regionSize;
-@property (nonatomic) FURegion *originRegion;
 @property (nonatomic) FUUniverse *universe;
 @property (nonatomic) NSArray *viewportStars;
 @property (nonatomic) NSMutableDictionary *regionStars;
@@ -25,6 +25,8 @@
 - (NSArray *)starsInRegion:(FURegion *)region;
 
 - (NSArray *)regionsInRect:(CGRect)rect;
+
+- (NSArray *)regionsInViewport;
 
 - (NSArray *)starsInViewport;
 

@@ -7,11 +7,16 @@
 #import "FUStar.h"
 
 
-@implementation FUUniverse {
+@implementation FUUniverse
 
-}
-- (NSString *)seed {
-    return @"a8d778e887f8884ff8c8e8";
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.seed = @"a8d778e887f8884ff8c8e8";
+        self.regionSize = CGSizeMake(5000, 5000);
+    }
+    return self;
 }
 
 - (NSArray *)starsInRegion:(NSIndexPath *)region {

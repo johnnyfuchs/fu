@@ -93,8 +93,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.regionSize = CGSizeMake(300, 300);
-        self.originRegion = [FURegion regionX:0 y:0];
         self.universe = FUUniverse.new;
         self.regionStars = NSMutableDictionary.new;
         self.viewport = UIScreen.mainScreen.bounds;
@@ -103,12 +101,18 @@
     return self;
 }
 
+- (CGSize)regionSize {
+    return self.universe.regionSize;
+}
+
+- (FURegion *)originRegion {
+    return [self regionAtPoint:self.viewport.origin];
+}
 
 - (FURegion *)regionAtPoint:(CGPoint)point {
-    // get the total offset of the rect based on the viewport's offset
-    CGPoint totalOffset = CGPointMake(point.x + self.viewport.origin.x, point.y + self.viewport.origin.y);
-    NSInteger regionX = (NSInteger) ceil(totalOffset.x / self.regionSize.width);
-    NSInteger regionY = (NSInteger) ceil(totalOffset.y / self.regionSize.height);
+
+    NSInteger regionX = (NSInteger) ceil(point.x / self.regionSize.width);
+    NSInteger regionY = (NSInteger) ceil(point.y / self.regionSize.height);
 
     FURegion *offsetRegion = [FURegion regionX:regionX y:regionY];
     return offsetRegion;
@@ -124,17 +128,21 @@
 - (NSArray *)regionsInRect:(CGRect)rect {
 
     FURegion *startRegion = [self regionAtPoint:rect.origin];
-    NSUInteger regionsWide = (NSUInteger) (ceil(rect.size.width / self.regionSize.width) + 2);
-    NSUInteger regionsTall = (NSUInteger) (ceil(rect.size.height / self.regionSize.height) + 2);
+    NSUInteger regionsWide = (NSUInteger) (ceil(rect.size.width / self.regionSize.width) + 0);
+    NSUInteger regionsTall = (NSUInteger) (ceil(rect.size.height / self.regionSize.height) + 0);
 
     NSMutableArray *regions = [@[startRegion] mutableCopy];
     for(NSUInteger x = 0; x < regionsWide; x ++) {
         for(NSUInteger y = 0; y < regionsTall; y ++) {
-            [regions addObject:[FURegion regionX:(self.originRegion.x + x - 1) y:(self.originRegion.y + y - 1)]];
+            [regions addObject:[FURegion regionX:(startRegion.x + x ) y:(startRegion.y + y)]];
         }
     }
 
     return regions;
+}
+
+- (NSArray *)regionsInViewport {
+    return [self regionsInRect:self.viewport];
 }
 
 - (NSArray *)starsInViewport {

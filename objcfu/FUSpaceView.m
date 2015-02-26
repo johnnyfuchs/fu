@@ -8,6 +8,7 @@
 #import "FUStarMap.h"
 #import "StarMapCollectionViewLayout.h"
 #import "FUStar.h"
+#import "UIView+FU.h"
 
 
 @interface FUSpaceView () <UICollectionViewDataSource, UIScrollViewDelegate>
@@ -27,7 +28,7 @@
 
         // Setup Map
         self.map = FUStarMap.new;
-        self.map.viewport = CGRectMake(0, 0, self.bounds.size.width * 3, self.bounds.size.height * 3);
+        self.map.viewport = CGRectMake(0, 0, self.width * 3, self.height * 3);
 
         // Setup CollectionViewLayout
         StarMapCollectionViewLayout *layout = [StarMapCollectionViewLayout layoutWithMap:self.map];
@@ -46,7 +47,7 @@
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     self.collectionView.frame = self.bounds;
-    self.map.viewport = CGRectMake(0, 0, self.bounds.size.width * 15, self.bounds.size.height * 15);
+    self.map.viewport = CGRectMake(0, 0, self.width * 3, self.height * 3);
     [self.collectionView reloadData];
 }
 
@@ -63,17 +64,23 @@
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    if(self.willHitScrollEdge){
-        return;
-    }
     BOOL left = targetContentOffset->x < kScrollEdgeThreshold;
     BOOL top =  targetContentOffset->y < kScrollEdgeThreshold;
-    BOOL bottom = targetContentOffset->x > (self.collectionView.contentSize.width - self.collectionView.frame.size.width) - kScrollEdgeThreshold;
-    BOOL right = targetContentOffset->y > (self.collectionView.contentSize.height - self.collectionView.frame.size.height) - kScrollEdgeThreshold;
+    BOOL bottom = targetContentOffset->x > (self.collectionView.contentSize.width - self.collectionView.width) - kScrollEdgeThreshold;
+    BOOL right = targetContentOffset->y > (self.collectionView.contentSize.height - self.collectionView.height) - kScrollEdgeThreshold;
     if( left || top || bottom || right ){
-        self.willHitScrollEdge = YES;
+        CGRect port = self.map.viewport;
+        port.origin.y -= targetContentOffset->y;
+        port.origin.x -= targetContentOffset->x;
+        self.map.viewport = port;
+        NSLog(@"%@", NSStringFromCGRect(self.map.viewport));
+        NSLog(@"%@", self.map.regionsInViewport);
+        NSLog(@"%lu", self.map.starsInViewport.count);
+        [self.collectionView reloadData];
+        [self.collectionView scrollRectToVisible:CGRectMake(self.width, self.height, self.width, self.height) animated:NO];
     }
 }
+
 
 //- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
 //    if(self.willHitScrollEdge){

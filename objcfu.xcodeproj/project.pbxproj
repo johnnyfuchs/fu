@@ -21,6 +21,7 @@
 		BB2ED36E42C4455CD34A135C /* FUPlanet.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2ED384A13743450DBA2A8F /* FUPlanet.m */; };
 		BB2ED4BA599FC80228B83976 /* FUStar.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2ED468A57A0338E6BF709D /* FUStar.m */; };
 		BB2ED6229E5DC03C8A604045 /* FUBody.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2EDD8DE03089B4D393E481 /* FUBody.m */; };
+		BB2ED6711643484A9DD99777 /* UIView+FU.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2EDE30B21A052BBE8C5AAA /* UIView+FU.m */; };
 		BB2ED7013B1E8D195C2CA20A /* FUUniverse.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2ED1E96A9A87699B146162 /* FUUniverse.m */; };
 		BB2ED891CA5B17DCE88DB29D /* FUSpaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2EDBC8FB369ABADB4300DA /* FUSpaceView.m */; };
 		BB2ED929540CA50A330C5048 /* StarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2ED606761A74F6D2A7CDC4 /* StarCell.m */; };
@@ -66,10 +67,12 @@
 		BB2ED5C1A1E245B8587A174F /* FURegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FURegion.h; sourceTree = "<group>"; };
 		BB2ED606761A74F6D2A7CDC4 /* StarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarCell.m; sourceTree = "<group>"; };
 		BB2ED6E97242192ED9272B18 /* FUStarMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUStarMap.h; sourceTree = "<group>"; };
+		BB2EDB2A11E61157B0B57B30 /* UIView+FU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FU.h"; sourceTree = "<group>"; };
 		BB2EDBC8FB369ABADB4300DA /* FUSpaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUSpaceView.m; sourceTree = "<group>"; };
 		BB2EDBF48887519913D677D1 /* FUBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUBody.h; sourceTree = "<group>"; };
 		BB2EDD2ED0C9926A8AF7F8B4 /* FUStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUStar.h; sourceTree = "<group>"; };
 		BB2EDD8DE03089B4D393E481 /* FUBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUBody.m; sourceTree = "<group>"; };
+		BB2EDE30B21A052BBE8C5AAA /* UIView+FU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FU.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,8 @@
 				201E58051B71E9EF21A482B8 /* FUCollectionView.h */,
 				BB2EDBC8FB369ABADB4300DA /* FUSpaceView.m */,
 				BB2ED0B867A1FAF21FA6D421 /* FUSpaceView.h */,
+				BB2EDE30B21A052BBE8C5AAA /* UIView+FU.m */,
+				BB2EDB2A11E61157B0B57B30 /* UIView+FU.h */,
 			);
 			path = objcfu;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				BB2ED929540CA50A330C5048 /* StarCell.m in Sources */,
 				201E56DFE892DAFABF05A337 /* FUCollectionView.m in Sources */,
 				BB2ED891CA5B17DCE88DB29D /* FUSpaceView.m in Sources */,
+				BB2ED6711643484A9DD99777 /* UIView+FU.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
