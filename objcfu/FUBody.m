@@ -4,6 +4,7 @@
 //
 
 #import "FUBody.h"
+#import "FURegion.h"
 
 
 @implementation FUBody

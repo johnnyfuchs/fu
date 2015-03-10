@@ -7,7 +7,5 @@
 #import "FUCollectionView.h"
 
 
-static const int kScrollEdgeThreshold = 10;
-
 @interface FUSpaceView : UIView
 @end

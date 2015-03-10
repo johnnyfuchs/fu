@@ -11,6 +11,9 @@
 @interface StarMapCollectionViewLayout : UICollectionViewLayout
 @property (nonatomic) FUStarMap *map;
 
+@property(nonatomic) CGRect viewPort;
+@property (nonatomic, readonly) NSArray *stars;
+
 + (instancetype)layoutWithMap:(FUStarMap *)map;
 
 @end

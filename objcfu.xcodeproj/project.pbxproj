@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		201E56DFE892DAFABF05A337 /* FUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 201E52D17E5B9321F33CC4D3 /* FUCollectionView.m */; };
+		201E57A0A971E7B62FFAA17C /* FUStarMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 201E599A3EA5070AAA171B05 /* FUStarMapTests.m */; };
 		B22552EF1A928A9F00478F12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B22552EE1A928A9F00478F12 /* main.m */; };
 		B22552F21A928A9F00478F12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B22552F11A928A9F00478F12 /* AppDelegate.m */; };
 		B22552F51A928A9F00478F12 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22552F41A928A9F00478F12 /* ViewController.m */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		201E52D17E5B9321F33CC4D3 /* FUCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUCollectionView.m; sourceTree = "<group>"; };
 		201E58051B71E9EF21A482B8 /* FUCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUCollectionView.h; sourceTree = "<group>"; };
+		201E599A3EA5070AAA171B05 /* FUStarMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUStarMapTests.m; sourceTree = "<group>"; };
 		B22552E91A928A9F00478F12 /* objcfu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = objcfu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B22552ED1A928A9F00478F12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B22552EE1A928A9F00478F12 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				B22553081A928A9F00478F12 /* objcfuTests.m */,
 				B22553061A928A9F00478F12 /* Supporting Files */,
+				201E599A3EA5070AAA171B05 /* FUStarMapTests.m */,
 			);
 			path = objcfuTests;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B22553091A928A9F00478F12 /* objcfuTests.m in Sources */,
+				201E57A0A971E7B62FFAA17C /* FUStarMapTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

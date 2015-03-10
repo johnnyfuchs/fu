@@ -15,9 +15,7 @@
 
 @property (nonatomic, readonly) CGSize regionSize;
 
-@property (nonatomic) CGRect viewport;
 @property (nonatomic) FUUniverse *universe;
-@property (nonatomic) NSArray *viewportStars;
 @property (nonatomic) NSMutableDictionary *regionStars;
 
 - (FURegion *)regionAtPoint:(CGPoint)point;
@@ -25,14 +23,6 @@
 - (NSArray *)starsInRegion:(FURegion *)region;
 
 - (NSArray *)regionsInRect:(CGRect)rect;
-
-- (NSArray *)regionsInViewport;
-
-- (NSArray *)starsInViewport;
-
-- (NSArray *)starsInRect:(CGRect)rect;
-
-- (FUStar *)starAtIndexPath:(NSIndexPath *)path;
 
 @end
 

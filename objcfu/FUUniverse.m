@@ -5,6 +5,7 @@
 
 #import "FUUniverse.h"
 #import "FUStar.h"
+#import "FURegion.h"
 
 
 @implementation FUUniverse
@@ -14,32 +15,25 @@
     self = [super init];
     if (self) {
         self.seed = @"a8d778e887f8884ff8c8e8";
-        self.regionSize = CGSizeMake(5000, 5000);
+        self.regionSize = CGSizeMake(100, 100);
+        self.size = CGSizeMake(1000000, 1000000);//CGSizeMake(NSUIntegerMax, NSUIntegerMax);
     }
     return self;
 }
 
-- (NSArray *)starsInRegion:(NSIndexPath *)region {
-//    return [
-//            Star(x: 0, y: 0, z: 0, mass: 0, type: .M),
-//    Star(x: 100, y: 100, z: 0, mass: 0, type: .M),
-//    Star(x: 120, y: 190, z: 0, mass: 0, type: .M),
-//    Star(x: 180, y: 80, z: 0, mass: 0, type: .M),
-//    Star(x: 90, y: 380, z: 0, mass: 0, type: .M),
-//    Star(x: 480, y: 480, z: 0, mass: 0, type: .M),
-//    Star(x: 80, y: 280, z: 0, mass: 0, type: .M),
-//    Star(x: 0, y: 480, z: 0, mass: 0, type: .M),
-//    Star(x: 480, y: 0, z: 0, mass: 0, type: .M),
-//    ]
-    return @[
-            [FUStar starWithMass:0 x:100 y:100 z:0 type:FUStarTypeM],
-            [FUStar starWithMass:0 x:120 y:190 z:0 type:FUStarTypeM],
-            [FUStar starWithMass:0 x:180 y:80 z:0 type:FUStarTypeM],
-            [FUStar starWithMass:0 x:90 y:180 z:0 type:FUStarTypeM],
-            [FUStar starWithMass:0 x:280 y:180 z:0 type:FUStarTypeM],
-            [FUStar starWithMass:0 x:80 y:150 z:0 type:FUStarTypeM],
-            [FUStar starWithMass:0 x:280 y:0 z:0 type:FUStarTypeM],
-    ];
+- (CGPoint)center {
+    return CGPointMake(self.size.width / 2, self.size.height / 2);
+}
+
+- (NSArray *)starsInRegion:(FURegion *)region {
+    NSMutableArray *stars = [NSMutableArray new];
+    NSInteger numberOfStars = 5 + arc4random_uniform(10);
+    while (numberOfStars--){
+        CGFloat x = arc4random_uniform((u_int32_t) floor(self.regionSize.width));
+        CGFloat y = arc4random_uniform((u_int32_t) floor(self.regionSize.height));
+        [stars addObject:[FUStar starWithMass:0 x:x y:y z:0 type:FUStarTypeM]];
+    }
+    return stars;
 }
 
 - (NSArray *)planetsForStar:(FUStar *)star inRegion:(NSIndexPath *)region {

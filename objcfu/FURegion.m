@@ -8,7 +8,7 @@
 
 @implementation FURegion
 
-+ (instancetype)regionX:(NSInteger)x y:(NSInteger)y {
++ (instancetype)regionX:(NSUInteger)x y:(NSUInteger)y {
     FURegion *region = FURegion.new;
     region.x = x;
     region.y = y;

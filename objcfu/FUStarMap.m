@@ -95,7 +95,6 @@
     if (self) {
         self.universe = FUUniverse.new;
         self.regionStars = NSMutableDictionary.new;
-        self.viewport = UIScreen.mainScreen.bounds;
     }
 
     return self;
@@ -103,10 +102,6 @@
 
 - (CGSize)regionSize {
     return self.universe.regionSize;
-}
-
-- (FURegion *)originRegion {
-    return [self regionAtPoint:self.viewport.origin];
 }
 
 - (FURegion *)regionAtPoint:(CGPoint)point {
@@ -128,53 +123,18 @@
 - (NSArray *)regionsInRect:(CGRect)rect {
 
     FURegion *startRegion = [self regionAtPoint:rect.origin];
-    NSUInteger regionsWide = (NSUInteger) (ceil(rect.size.width / self.regionSize.width) + 0);
-    NSUInteger regionsTall = (NSUInteger) (ceil(rect.size.height / self.regionSize.height) + 0);
+    NSUInteger regionsWide = (NSUInteger)ceil(rect.size.width / self.regionSize.width);
+    NSUInteger regionsTall = (NSUInteger)ceil(rect.size.height / self.regionSize.height);
 
-    NSMutableArray *regions = [@[startRegion] mutableCopy];
+    NSMutableArray *regions = [NSMutableArray new];
     for(NSUInteger x = 0; x < regionsWide; x ++) {
         for(NSUInteger y = 0; y < regionsTall; y ++) {
-            [regions addObject:[FURegion regionX:(startRegion.x + x ) y:(startRegion.y + y)]];
+            FURegion *region = [FURegion regionX:(startRegion.x + x ) y:(startRegion.y + y)];
+            [regions addObject:region];
         }
     }
-
     return regions;
 }
 
-- (NSArray *)regionsInViewport {
-    return [self regionsInRect:self.viewport];
-}
-
-- (NSArray *)starsInViewport {
-    if(!self.viewportStars){
-        self.viewportStars = [self starsInRect:self.viewport];
-    }
-    return self.viewportStars;
-}
-
-- (NSArray *)starsInRect:(CGRect)rect {
-    NSMutableArray *stars = NSMutableArray.new;
-    NSArray *regions = [self regionsInRect:rect];
-    for(FURegion *region in regions){
-        NSArray *regionStars = [self starsInRegion:region];
-
-        for(FUStar *star in regionStars){
-            star.region = region;
-            [stars addObject:star];
-        }
-    }
-    return stars;
-}
-
-- (void)setViewport:(CGRect)viewport {
-    _viewport = viewport;
-    self.viewportStars = nil;
-}
-
-
-- (FUStar *)starAtIndexPath:(NSIndexPath *)path {
-    NSArray *stars = [self starsInViewport];
-    return stars[(NSUInteger) path.item];
-}
 
 @end

@@ -7,6 +7,7 @@
 #import "FUStarMap.h"
 #import "FUStar.h"
 #import "FURegion.h"
+#import "FUUniverse.h"
 
 //
 //
@@ -54,7 +55,25 @@
 //
 
 
+@interface FUStarLayout : NSObject
+@property FUStar *star;
+@property FURegion *region;
+@property NSIndexPath *indexPath;
+@property CGRect frame;
+@property UICollectionViewLayoutAttributes *attributes;
+@end
+
+@implementation FUStarLayout
+@end
+
+@interface StarMapCollectionViewLayout ()
+@property(nonatomic, strong) NSMutableArray *starLayouts;
+@property(nonatomic, strong) NSArray *regions;
+@end
+
 @implementation StarMapCollectionViewLayout
+
+#pragma mark Initializers
 
 + (instancetype)layoutWithMap:(FUStarMap *)map {
     StarMapCollectionViewLayout *layout = StarMapCollectionViewLayout.new;
@@ -62,41 +81,78 @@
     return layout;
 }
 
+#pragma mark UICollectionView Subclass
+
 - (CGSize)collectionViewContentSize {
-    return self.map.viewport.size;
+    return self.map.universe.size;
 }
 
+- (void)prepareLayout {
+    [super prepareLayout];
+    self.starLayouts = [NSMutableArray new];
+    self.regions = [self.map regionsInRect:self.viewPort];
+    NSUInteger starCounter = 0;
+    for(FURegion *region in self.regions){
+        NSArray *stars = [self.map starsInRegion:region];
+        for(FUStar *star in stars){
+            FUStarLayout *starLayout = [FUStarLayout new];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:starCounter inSection:0];
+            UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+            attributes.frame = [self frameForStar:star inRegion:region];
+            starLayout.attributes = attributes;
+            starLayout.frame = attributes.frame;
+            starLayout.indexPath = indexPath;
+            starLayout.region = region;
+            starLayout.star = star;
+            starCounter += 1;
+            [self.starLayouts addObject:starLayout];
+        }
+    }
+}
+
+
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSArray *paths = [self indexPathsInRect:rect];
+    NSLog(@"rect: %@", NSStringFromCGRect(rect));
     NSMutableArray *allAttributes = NSMutableArray.new;
-    for(NSIndexPath *path in paths){
-        [allAttributes addObject:[self layoutAttributesForItemAtIndexPath:path]];
+    for(FUStarLayout *layout in self.starLayouts){
+        if(CGRectIntersectsRect(rect, layout.attributes.frame)){
+            [allAttributes addObject:layout.attributes];
+        }
     }
     return allAttributes;
 }
 
-- (NSArray *)indexPathsInRect:(CGRect)rect {
-    NSMutableArray *paths = NSMutableArray.new;
-    NSArray *allStars = [self.map starsInViewport];
-    NSArray *viewStars = [self.map starsInRect:rect];
-    NSInteger item = 0;
-    for(FUStar *star in allStars){
-        if([viewStars containsObject:star]){
-            [paths addObject:[NSIndexPath indexPathForItem:item inSection:0]];
-        }
-        item += 1;
-    }
-    return paths;
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
+    FUStarLayout *layout = self.starLayouts[indexPath.item];
+    return layout.attributes;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-    FUStar *star = [self.map starAtIndexPath:indexPath];
-    CGFloat originX = star.x + (star.region.x * self.map.regionSize.width);
-    CGFloat originY = star.y + (star.region.y * self.map.regionSize.height);
-    attributes.frame = CGRectMake(originX, originY, 20, 20);
-    NSLog(@"star: %@ attr: %@", attributes, star);
-    return attributes;
+#pragma Mark DataSource
+
+- (NSArray *)stars {
+    return [self.starLayouts valueForKey:@"star"];
 }
+
+
+#pragma Mark Helpers
+
+- (CGRect)frameForStar:(FUStar *)star inRegion:(FURegion *)region {
+    CGFloat originX = star.x + (region.x * self.map.regionSize.width);
+    CGFloat originY = star.y + (region.y * self.map.regionSize.height);
+    return CGRectMake(originX, originY, 20, 20);
+}
+
+- (void)setViewPort:(CGRect)viewPort {
+    _viewPort = viewPort;
+    NSArray *regions = [self.map regionsInRect:viewPort];
+    for(FURegion *region in regions){
+        if(![self.regions containsObject:region]){
+            NSLog(@"chaging regions because of new region: %@", region);
+            [self.collectionView reloadData];
+            return;
+        }
+    }
+}
+
 
 @end

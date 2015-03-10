@@ -7,6 +7,7 @@
 #import <UIKit/UIKit.h>
 
 @class FUStar;
+@class FURegion;
 
 
 //public class Universe {
@@ -36,8 +37,10 @@
 
 
 @interface FUUniverse : NSObject
+@property (nonatomic) CGSize size;
+@property (nonatomic) CGPoint center;
 @property (nonatomic) NSString *seed;
 @property (nonatomic) CGSize regionSize;
-- (NSArray *)starsInRegion:(NSIndexPath *)region;
+- (NSArray *)starsInRegion:(FURegion *)region;
 - (NSArray *)planetsForStar:(FUStar *)star inRegion:(NSIndexPath *)region;
 @end

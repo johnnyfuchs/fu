@@ -7,9 +7,9 @@
 
 
 @interface FURegion : NSObject <NSCopying>
-@property (nonatomic) NSInteger x;
-@property (nonatomic) NSInteger y;
+@property (nonatomic) NSUInteger x;
+@property (nonatomic) NSUInteger y;
 
-+(instancetype)regionX:(NSInteger)x y:(NSInteger)y;
++(instancetype)regionX:(NSUInteger)x y:(NSUInteger)y;
 
 @end
