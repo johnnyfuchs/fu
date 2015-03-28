@@ -17,12 +17,13 @@
     star.y = y;
     star.z = z;
     star.type = type;
+    star.region = region;
     return star;
 }
 
 - (UIColor *)color {
-    CGFloat hue = (self.region.x + 8.) / 16.;
-    CGFloat sat = (self.region.y + 8.) / 16.;
+    CGFloat hue = (self.region.x + 8.f) / 16.f;
+    CGFloat sat = (self.region.y + 8.f) / 16.f;
     return [UIColor colorWithHue:hue saturation:sat brightness:.8 alpha:1];
 }
 

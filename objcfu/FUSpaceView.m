@@ -14,10 +14,11 @@
 #import "FUStarMapView.h"
 
 
-@interface FUSpaceView () <UICollectionViewDataSource, UIScrollViewDelegate>
+@interface FUSpaceView () <UIScrollViewDelegate>
 @property (nonatomic) FUStarMap *map;
 @property(nonatomic) CGRect viewPort;
 @property(nonatomic, strong) FUStarMapView *mapView;
+@property(nonatomic, strong) UILabel *label;
 @end
 
 @implementation FUSpaceView
@@ -31,15 +32,9 @@
 
         // Setup CollectionView
         self.mapView = [FUStarMapView starMapViewWithFrame:self.bounds andMap:self.map];
-        self.mapView.delegate = self;
-        self.mapView.pagingEnabled = NO;
-        self.mapView.contentSize = self.map.universe.size;
+        self.mapView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:self.mapView];
 
-        // setup the default viewport
-        self.viewPort = CGRectMake(self.map.universe.center.x, self.map.universe.center.y, 100, 100);
-        self.mapView.contentOffset = self.viewPort.origin;
-        self.mapView.viewPort = self.viewPort;
     }
     return self;
 }
@@ -47,14 +42,6 @@
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     self.mapView.frame = self.bounds;
-}
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    CGRect viewPort = self.viewPort;
-    viewPort.origin.x += targetContentOffset->x;
-    viewPort.origin.y += targetContentOffset->y;
-    viewPort.size = self.frame.size;
-    self.mapView.viewPort = viewPort;
 }
 
 @end

@@ -9,9 +9,7 @@
 @class FUStarMap;
 
 
-@interface FUStarMapView : UIScrollView
-
-@property (nonatomic) CGRect viewPort;
+@interface FUStarMapView : UIScrollView <UIScrollViewDelegate>
 
 + (instancetype)starMapViewWithFrame:(CGRect)frame andMap:(FUStarMap *)map;
 

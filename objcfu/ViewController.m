@@ -74,15 +74,18 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.spaceView = FUSpaceView.new;
+        self.spaceView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.spaceView.frame = self.view.bounds;
     [self.view addSubview:self.spaceView];
+    NSDictionary *views = @{@"space":self.spaceView};
+    self.spaceView.frame = self.view.bounds;
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[space]|" options:nil metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[space]|" options:nil metrics:nil views:views]];
 }
 
 

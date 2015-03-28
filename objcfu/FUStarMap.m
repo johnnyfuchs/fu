@@ -120,6 +120,8 @@
     return self.regionStars[region];
 }
 
+
+
 - (NSArray *)regionsInRect:(CGRect)rect {
 
     FURegion *startRegion = [self regionAtPoint:rect.origin];

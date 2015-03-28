@@ -15,8 +15,8 @@
     self = [super init];
     if (self) {
         self.seed = @"a8d778e887f8884ff8c8e8";
-        self.regionSize = CGSizeMake(100, 100);
-        self.size = CGSizeMake(1000000, 1000000);//CGSizeMake(NSUIntegerMax, NSUIntegerMax);
+        self.regionSize = CGSizeMake(500, 500);
+        self.size = CGSizeMake(10000000000000000, 10000000000000000);
     }
     return self;
 }
@@ -26,7 +26,7 @@
 }
 
 - (NSArray *)starsInRegion:(FURegion *)region {
-    NSMutableArray *stars = [NSMutableArray new];
+    NSMutableArray *stars = NSMutableArray.new;
     NSInteger numberOfStars = 5 + arc4random_uniform(10);
     while (numberOfStars--){
         CGFloat x = arc4random_uniform((u_int32_t) floor(self.regionSize.width));
