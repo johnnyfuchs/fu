@@ -6,6 +6,8 @@
 #import <Foundation/Foundation.h>
 #import "FUCollectionView.h"
 
+@class FUStarMapView;
+
 
 @interface FUSpaceView : UIView
 @end

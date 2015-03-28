@@ -10,7 +10,7 @@
 
 @implementation FUStar
 
-+ (instancetype)starWithMass:(NSUInteger)mass x:(NSUInteger)x y:(NSUInteger)y z:(NSUInteger)z type:(FUStarType)type {
++ (instancetype)starWithMass:(NSUInteger)mass x:(NSUInteger)x y:(NSUInteger)y z:(NSUInteger)z type:(FUStarType)type inRegion:(FURegion *)region {
     FUStar *star = FUStar.new;
     star.mass = mass;
     star.x = x;
@@ -33,6 +33,11 @@
     if (!other || ![[other class] isEqual:[self class]])
         return NO;
     return NO;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    FUStar *star = [FUStar starWithMass:self.mass x:self.x y:self.y z:self.z type:self.type inRegion:self.region];
+    return star;
 }
 
 

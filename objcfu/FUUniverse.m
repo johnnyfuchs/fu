@@ -31,7 +31,7 @@
     while (numberOfStars--){
         CGFloat x = arc4random_uniform((u_int32_t) floor(self.regionSize.width));
         CGFloat y = arc4random_uniform((u_int32_t) floor(self.regionSize.height));
-        [stars addObject:[FUStar starWithMass:0 x:x y:y z:0 type:FUStarTypeM]];
+        [stars addObject:[FUStar starWithMass:0 x:x y:y z:0 type:FUStarTypeM inRegion:region]];
     }
     return stars;
 }

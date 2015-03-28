@@ -8,13 +8,16 @@
 #import "FUStarMap.h"
 #import "StarMapCollectionViewLayout.h"
 #import "FUStar.h"
+#import "FUStarMapView.h"
 #import "UIView+FU.h"
 #import "FUUniverse.h"
+#import "FUStarMapView.h"
 
 
 @interface FUSpaceView () <UICollectionViewDataSource, UIScrollViewDelegate>
-@property(nonatomic, strong) FUCollectionView *collectionView;
 @property (nonatomic) FUStarMap *map;
+@property(nonatomic) CGRect viewPort;
+@property(nonatomic, strong) FUStarMapView *mapView;
 @end
 
 @implementation FUSpaceView
@@ -26,52 +29,32 @@
         // Setup Map
         self.map = FUStarMap.new;
 
-        // Setup CollectionViewLayout
-        StarMapCollectionViewLayout *layout = [StarMapCollectionViewLayout layoutWithMap:self.map];
-
         // Setup CollectionView
-        self.collectionView = [FUCollectionView.alloc initWithFrame:self.bounds collectionViewLayout:layout];
-        self.collectionView.dataSource = self;
-        self.collectionView.scrollDelegate = self;
-        self.collectionView.pagingEnabled = NO;
-        self.collectionView.contentSize = self.map.universe.size;
-        [self.collectionView registerClass:[StarCell class] forCellWithReuseIdentifier:@"starCell"];
-        [self addSubview:self.collectionView];
+        self.mapView = [FUStarMapView starMapViewWithFrame:self.bounds andMap:self.map];
+        self.mapView.delegate = self;
+        self.mapView.pagingEnabled = NO;
+        self.mapView.contentSize = self.map.universe.size;
+        [self addSubview:self.mapView];
 
         // setup the default viewport
-        self.starLayout.viewPort = CGRectMake(self.map.universe.center.x, self.map.universe.center.y, 100, 100);
-        self.collectionView.contentOffset = self.starLayout.viewPort.origin;
+        self.viewPort = CGRectMake(self.map.universe.center.x, self.map.universe.center.y, 100, 100);
+        self.mapView.contentOffset = self.viewPort.origin;
+        self.mapView.viewPort = self.viewPort;
     }
     return self;
 }
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
-    self.collectionView.frame = self.bounds;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSUInteger starCount = self.starLayout.stars.count;
-    return starCount;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    StarCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"starCell" forIndexPath:indexPath];
-    FUStar *star = self.starLayout.stars[indexPath.item];
-    cell.backgroundColor = star.color;
-    return cell;
+    self.mapView.frame = self.bounds;
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    CGRect viewPort = self.starLayout.viewPort;
+    CGRect viewPort = self.viewPort;
     viewPort.origin.x += targetContentOffset->x;
     viewPort.origin.y += targetContentOffset->y;
-    viewPort.size = self.collectionView.frame.size;
-    self.starLayout.viewPort = viewPort;
-}
-
-- (StarMapCollectionViewLayout *) starLayout {
-    return (StarMapCollectionViewLayout *) self.collectionView.collectionViewLayout;
+    viewPort.size = self.frame.size;
+    self.mapView.viewPort = viewPort;
 }
 
 @end

@@ -48,11 +48,11 @@ typedef enum {
     FUStarTypeG,
 } FUStarType;
 
-@interface FUStar : FUBody
+@interface FUStar : FUBody <NSCopying>
 @property (nonatomic) FUStarType type;
 @property (nonatomic) FURegion *region;
 @property(nonatomic, strong) UIColor *color;
 
-+ (instancetype) starWithMass:(NSUInteger)mass x:(NSUInteger)x y:(NSUInteger)y z:(NSUInteger)z type:(FUStarType)type;
++ (instancetype)starWithMass:(NSUInteger)mass x:(NSUInteger)x y:(NSUInteger)y z:(NSUInteger)z type:(FUStarType)type inRegion:(FURegion *)region;
 
 @end
