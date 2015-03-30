@@ -16,6 +16,9 @@
 		B22552FA1A928A9F00478F12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B22552F91A928A9F00478F12 /* Images.xcassets */; };
 		B22552FD1A928A9F00478F12 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22552FB1A928A9F00478F12 /* LaunchScreen.xib */; };
 		B22553091A928A9F00478F12 /* objcfuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B22553081A928A9F00478F12 /* objcfuTests.m */; };
+		B2E465811AC762E500A8973B /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2E465801AC762E500A8973B /* SceneKit.framework */; };
+		B2E465841AC763BB00A8973B /* StarParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B2E465821AC763BB00A8973B /* StarParticle.sks */; };
+		B2E465851AC763BB00A8973B /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B2E465831AC763BB00A8973B /* spark.png */; };
 		BB2ED08C1C8222F3EDA59C1E /* FUStarMap.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2ED4E3A86AE50A48E38725 /* FUStarMap.m */; };
 		BB2ED1EFE7A473E798BAC6FF /* FURegion.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2ED0A9AF70CBE3A67534C0 /* FURegion.m */; };
 		BB2ED245AE7947BAF60305F3 /* StarMapCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2ED46EEB72BA13DB0DBD55 /* StarMapCollectionViewLayout.m */; };
@@ -58,6 +61,9 @@
 		B22553021A928A9F00478F12 /* objcfuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = objcfuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B22553071A928A9F00478F12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B22553081A928A9F00478F12 /* objcfuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = objcfuTests.m; sourceTree = "<group>"; };
+		B2E465801AC762E500A8973B /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		B2E465821AC763BB00A8973B /* StarParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarParticle.sks; sourceTree = "<group>"; };
+		B2E465831AC763BB00A8973B /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		BB2ED07B1BD6C72BF0F361C3 /* FUPlanet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUPlanet.h; sourceTree = "<group>"; };
 		BB2ED0A9AF70CBE3A67534C0 /* FURegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FURegion.m; sourceTree = "<group>"; };
 		BB2ED0B867A1FAF21FA6D421 /* FUSpaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUSpaceView.h; sourceTree = "<group>"; };
@@ -67,6 +73,7 @@
 		BB2ED1E96A9A87699B146162 /* FUUniverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUUniverse.m; sourceTree = "<group>"; };
 		BB2ED32F265F77C555EE56DC /* FUUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUUniverse.h; sourceTree = "<group>"; };
 		BB2ED384A13743450DBA2A8F /* FUPlanet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUPlanet.m; sourceTree = "<group>"; };
+		BB2ED3E73E9E978979E48928 /* StarScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarScene.h; sourceTree = "<group>"; };
 		BB2ED468A57A0338E6BF709D /* FUStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUStar.m; sourceTree = "<group>"; };
 		BB2ED46EEB72BA13DB0DBD55 /* StarMapCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarMapCollectionViewLayout.m; sourceTree = "<group>"; };
 		BB2ED4E3A86AE50A48E38725 /* FUStarMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUStarMap.m; sourceTree = "<group>"; };
@@ -91,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2E465811AC762E500A8973B /* SceneKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +115,7 @@
 		B22552E01A928A9F00478F12 = {
 			isa = PBXGroup;
 			children = (
+				B2E465801AC762E500A8973B /* SceneKit.framework */,
 				B22552EB1A928A9F00478F12 /* objcfu */,
 				B22553051A928A9F00478F12 /* objcfuTests */,
 				B22552EA1A928A9F00478F12 /* Products */,
@@ -128,6 +137,8 @@
 				B22552F01A928A9F00478F12 /* AppDelegate.h */,
 				B22552F11A928A9F00478F12 /* AppDelegate.m */,
 				B22552F31A928A9F00478F12 /* ViewController.h */,
+				B2E465821AC763BB00A8973B /* StarParticle.sks */,
+				B2E465831AC763BB00A8973B /* spark.png */,
 				B22552F41A928A9F00478F12 /* ViewController.m */,
 				B22552F61A928A9F00478F12 /* Main.storyboard */,
 				B22552F91A928A9F00478F12 /* Images.xcassets */,
@@ -161,6 +172,7 @@
 				BB2EDCD474533798B6DB84AB /* NSArray+FU.h */,
 				BB2ED0F612FDB9E8BB4C94AC /* FUStarView.m */,
 				BB2ED94427053C4B9E415D45 /* FUStarView.h */,
+				BB2ED3E73E9E978979E48928 /* StarScene.h */,
 			);
 			path = objcfu;
 			sourceTree = "<group>";
@@ -241,6 +253,7 @@
 				TargetAttributes = {
 					B22552E81A928A9F00478F12 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = R83MTNZF23;
 					};
 					B22553011A928A9F00478F12 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -272,7 +285,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2E465851AC763BB00A8973B /* spark.png in Resources */,
 				B22552F81A928A9F00478F12 /* Main.storyboard in Resources */,
+				B2E465841AC763BB00A8973B /* StarParticle.sks in Resources */,
 				B22552FD1A928A9F00478F12 /* LaunchScreen.xib in Resources */,
 				B22552FA1A928A9F00478F12 /* Images.xcassets in Resources */,
 			);
@@ -433,9 +448,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = objcfu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -443,9 +461,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = objcfu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -4,7 +4,9 @@
 //
 
 #import "UIView+FU.h"
+#import <objc/runtime.h>
 
+static NSUInteger sFUTappingSelectorIdentifier = 0;
 
 @implementation UIView (FU)
 - (CGFloat)left {
@@ -108,4 +110,24 @@
     view.backgroundColor = color;
     return view;
 }
+
+- (void)on:(NSUInteger)tapCount taps:(HITapHandler)handler
+{
+    self.userInteractionEnabled = YES;
+
+    NSString *selectorName = [NSString stringWithFormat:@"fu_tapGestureSelector_%d:",sFUTappingSelectorIdentifier++];
+    SEL newSelector = NSSelectorFromString(selectorName);
+
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:newSelector];
+    tapGesture.numberOfTouchesRequired = tapCount;
+    tapGesture.cancelsTouchesInView = NO;
+    [self addGestureRecognizer:tapGesture];
+
+    __block HITapHandler handlerCopy = [handler copy];
+    IMP implementation = imp_implementationWithBlock(^{
+        handlerCopy(tapGesture);
+    });
+    class_addMethod([self class], newSelector, implementation, "v@:@");
+}
+
 @end

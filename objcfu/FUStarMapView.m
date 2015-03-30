@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSMutableArray *loadedRegions;
 @property (nonatomic, strong) FUStarMap *map;
 @property(nonatomic, strong) UIView *starContainer;
+@property(nonatomic, strong) NSMutableArray *reusableStarViews;
+@property(nonatomic) NSUInteger starViewReuseCounter;
 @end
 
 @implementation FUStarMapView
@@ -46,7 +48,6 @@
 
         self.minimumZoomScale = 0.25f;
         self.maximumZoomScale = 2.0f;
-
         self.contentSize = self.map.universe.size;
         self.contentOffset = self.map.universe.center;
 
@@ -70,15 +71,14 @@
             [self.loadedRegions addObject:region];
         }
     }];
-    NSLog(@"regions :%i", self.loadedRegions.count);
+    NSLog(@"loaded regions :%i", self.loadedRegions.count);
+    NSLog(@"scale :%f", self.zoomScale);
 }
 
 - (void) addStars:(NSArray *)stars {
     [stars each:^(FUStar *star) {
-        FUStarView *starView = FUStarView.new;
-        starView.backgroundColor = UIColor.greenColor;
+        FUStarView *starView = [self reusableStarView];
         starView.frame = [self frameForStar:star];
-        [self.starContainer addSubview:starView];
     }];
 }
 
@@ -89,30 +89,42 @@
     return CGRectMake(originX, originY, 20, 20);
 }
 
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat scale = self.zoomScale;
-    CGSize size = CGSizeMake(self.frame.size.width * 2, self.frame.size.height * 2);
-    CGPoint origin = scrollView.contentOffset;
-    CGRect viewPort = CGRectMake(
-            origin.x - (size.width / scale),
-            origin.y - (size.height / scale),
-            (size.width * 2) / scale,
-            (size.height * 2) / scale
-    );
-    
-    [self loadStarsInRect:viewPort];
+    CGRect convertedRect = [self convertRect:self.bounds toView:self.starContainer];
+    [self loadStarsInRect:convertedRect];
 }
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    NSLog(@"loaded: %i", self.starContainer.subviews.count);
-
-}
-
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.starContainer;
 }
 
+- (FUStarView *)reusableStarView {
+
+    NSUInteger reusableStarsCount = 1000;
+
+    if(!self.reusableStarViews){
+        self.reusableStarViews = NSMutableArray.new;
+
+        while (reusableStarsCount--){
+            FUStarView *starView = FUStarView.new;
+            starView.backgroundColor = UIColor.greenColor;
+            [self.reusableStarViews addObject:starView];
+        }
+    }
+    if(self.starViewReuseCounter >= reusableStarsCount){
+        self.starViewReuseCounter = 0;
+    }
+
+    NSUInteger reuseIndex = self.starViewReuseCounter;
+    self.starViewReuseCounter += 1;
+
+    FUStarView *starView = self.reusableStarViews[reuseIndex];
+    if(!starView.superview){
+        [self.starContainer addSubview:starView];
+    }
+    return starView;
+}
 
 @end

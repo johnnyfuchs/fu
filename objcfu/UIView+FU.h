@@ -6,6 +6,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef void (^HITapHandler)(UIGestureRecognizer *);
+
 @interface UIView (FU)
 
 @property (nonatomic) CGFloat left;
@@ -18,5 +20,9 @@
 @property (nonatomic) CGSize size;
 @property (nonatomic) CGFloat centerX;
 @property (nonatomic) CGFloat centerY;
+
++ (UIView *)withColor:(UIColor *)color;
+
+- (void)on:(NSUInteger)tapCount taps:(HITapHandler)handler;
 
 @end

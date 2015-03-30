@@ -41,6 +41,7 @@
 @property (nonatomic) CGPoint center;
 @property (nonatomic) NSString *seed;
 @property (nonatomic) CGSize regionSize;
+
 - (NSArray *)starsInRegion:(FURegion *)region;
 - (NSArray *)planetsForStar:(FUStar *)star inRegion:(NSIndexPath *)region;
 @end

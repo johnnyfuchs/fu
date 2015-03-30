@@ -16,9 +16,7 @@
 
 @interface FUSpaceView () <UIScrollViewDelegate>
 @property (nonatomic) FUStarMap *map;
-@property(nonatomic) CGRect viewPort;
 @property(nonatomic, strong) FUStarMapView *mapView;
-@property(nonatomic, strong) UILabel *label;
 @end
 
 @implementation FUSpaceView
