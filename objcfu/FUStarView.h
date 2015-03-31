@@ -12,6 +12,6 @@
 
 @property(nonatomic, strong) FUStar *star;
 
-+ (instancetype) reusableStarViewWithStar:(FUStar *)star;
+- (void)setEffectsVisible:(BOOL)visible;
 
 @end

@@ -8,7 +8,7 @@
 
 
 @interface FUStarView ()
-@property(nonatomic, strong) CAEmitterCell *particle;
+@property(nonatomic, strong) CAEmitterLayer *glowLayer;
 @end
 
 @implementation FUStarView
@@ -16,19 +16,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.particle = [CAEmitterCell emitterCell];
-        self.particle.scaleSpeed = 10;
-        self.particle.lifetime = 2.481715;
-        self.particle.velocity = 332.3636968085106;
-        self.particle.contents = [UIImage imageNamed:@"spark.png"];
-        self.particle.name = @"New Emitter";
-        self.particle.color = [[UIColor colorWithRed:0.50 green:0.00 blue:1.00 alpha:1.00] CGColor];
-        self.particle.scaleRange = 4.178236607142859;
-        self.particle.lifetimeRange = 1.6;
-        self.particle.greenRange = -2.775558e-17;
-        self.particle.birthRate = 40;
-        self.particle.emissionRange = -6.283185306666667;
-        self.particle.scale = 0;
+        self.glowLayer = [FUStarView glowEmitterLayer];
+        [self setEffectsVisible:YES];
     }
 
     return self;
@@ -39,6 +28,17 @@
     self.backgroundColor = UIColor.greenColor;
 }
 
+- (void)setEffectsVisible:(BOOL)visible {
+    if(visible){
+        BOOL added = (BOOL) self.glowLayer.superlayer;
+        if(!added){
+            [self.layer addSublayer:self.glowLayer];
+        }
+    } else {
+        [self.glowLayer removeFromSuperlayer];
+    }
+}
+
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
@@ -47,6 +47,34 @@
 
 + (instancetype)reusableStarViewWithStar:(FUStar *)star {
     return nil;
+}
+
+
++ (CAEmitterLayer *)glowEmitterLayer
+{
+    CAEmitterLayer *emitterLayer = [CAEmitterLayer layer];
+    emitterLayer.emitterPosition = CGPointMake(10, 10);
+
+    CAEmitterCell *emitterCell = [CAEmitterCell emitterCell];
+    emitterCell.contents = (__bridge id)[[UIImage imageNamed:@"spark"] CGImage];
+
+    emitterCell.birthRate = 5.0f;
+    emitterCell.velocity = 1;
+    emitterCell.velocityRange = 3;
+    emitterCell.yAcceleration = 0;
+    emitterCell.emissionLongitude = M_PI;
+    emitterCell.emissionRange = M_PI;
+    emitterCell.scale = 0.1f;
+    emitterCell.scaleSpeed = 0.5f;
+    emitterCell.scaleRange = 0.5f;
+    emitterCell.color = [UIColor colorWithRed:0
+                                       green:1
+                                        blue:0
+                                       alpha:0.2].CGColor;
+    [emitterCell setLifetime:3.0f];
+    [emitterCell setLifetimeRange:2.0f];
+    emitterLayer.emitterCells = @[emitterCell];
+    return emitterLayer;
 }
 
 @end

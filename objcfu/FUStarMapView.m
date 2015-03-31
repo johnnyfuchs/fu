@@ -30,7 +30,7 @@
 - (instancetype)initWithFrame:(CGRect)frame andMap:(FUStarMap *)map {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColor.grayColor;
+        self.backgroundColor = [UIColor blackColor];
         self.map = map;
         self.delegate = self;
         self.showsHorizontalScrollIndicator = NO;
@@ -46,7 +46,7 @@
         self.starContainer = [[UIView alloc] initWithFrame:universeRect];
         [self addSubview:self.starContainer];
 
-        self.minimumZoomScale = 0.05f;
+        self.minimumZoomScale = 0.1f;
         self.maximumZoomScale = 2.0f;
         self.contentSize = self.map.universe.size;
         self.contentOffset = self.map.universe.center;
@@ -100,15 +100,29 @@
 
     CGRect convertedRect = [self convertRect:self.bounds toView:self.starContainer];
     [self loadStarsInRect:convertedRect];
+    [self updateEmitters];
+
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.starContainer;
 }
+//
+//- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+//    [self updateEmitters];
+//}
+
+
+- (void) updateEmitters {
+    BOOL showEmitters = self.zoomScale > 0.1;
+    [self.starContainer.subviews each:^(FUStarView *starView) {
+        [starView setEffectsVisible:showEmitters];
+    }];
+}
 
 - (FUStarView *)reusableStarView {
 
-    NSUInteger reusableStarsCount = 10000;
+    NSUInteger reusableStarsCount = 2000;
 
     if(!self.reusableStarViews){
         self.reusableStarViews = NSMutableArray.new;

@@ -4,18 +4,12 @@
 //
 
 #import "FUSpaceView.h"
-#import "StarCell.h"
 #import "FUStarMap.h"
-#import "StarMapCollectionViewLayout.h"
-#import "FUStar.h"
-#import "FUStarMapView.h"
-#import "UIView+FU.h"
-#import "FUUniverse.h"
 #import "FUStarMapView.h"
 
 
 @interface FUSpaceView () <UIScrollViewDelegate>
-@property (nonatomic) FUStarMap *map;
+@property(nonatomic) FUStarMap *map;
 @property(nonatomic, strong) FUStarMapView *mapView;
 @end
 
@@ -32,6 +26,10 @@
         self.mapView = [FUStarMapView starMapViewWithFrame:self.bounds andMap:self.map];
         self.mapView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:self.mapView];
+
+        NSDictionary *views = @{ @"map" : self.mapView };
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[map]" options:nil metrics:nil views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[map]" options:nil metrics:nil views:views]];
 
     }
     return self;
