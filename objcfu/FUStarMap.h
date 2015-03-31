@@ -24,6 +24,8 @@
 
 - (NSArray *)regionsInRect:(CGRect)rect;
 
+- (CGRect)frameForRegion:(FURegion *)region;
+
 @end
 
 

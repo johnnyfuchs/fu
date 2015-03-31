@@ -11,5 +11,4 @@
 @property (nonatomic) NSUInteger y;
 
 +(instancetype)regionX:(NSUInteger)x y:(NSUInteger)y;
-
 @end

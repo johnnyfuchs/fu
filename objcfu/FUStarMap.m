@@ -106,8 +106,8 @@
 
 - (FURegion *)regionAtPoint:(CGPoint)point {
 
-    NSInteger regionX = (NSInteger) ceil(point.x / self.regionSize.width);
-    NSInteger regionY = (NSInteger) ceil(point.y / self.regionSize.height);
+    NSInteger regionX = (NSInteger) floor(point.x / self.regionSize.width);
+    NSInteger regionY = (NSInteger) floor(point.y / self.regionSize.height);
 
     FURegion *offsetRegion = [FURegion regionX:regionX y:regionY];
     return offsetRegion;
@@ -136,6 +136,15 @@
         }
     }
     return regions;
+}
+
+- (CGRect)frameForRegion:(FURegion *)region {
+    return CGRectMake(
+            self.regionSize.width * region.x,
+            self.regionSize.height * region.y,
+            self.regionSize.width,
+            self.regionSize.height
+    );
 }
 
 

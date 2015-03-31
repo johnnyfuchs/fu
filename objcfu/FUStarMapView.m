@@ -63,12 +63,20 @@
 
 
 - (void)loadStarsInRect:(CGRect)rect {
+
     NSArray *regions = [self.map regionsInRect:rect];
     [regions each:^(FURegion *region) {
         if(![self.loadedRegions containsObject:region]){
             NSArray *stars = [self.map starsInRegion:region];
             [self addStars:stars];
             [self.loadedRegions addObject:region];
+
+            CGRect frame = [self.map frameForRegion:region];
+            UIView *regionView = [[UIView alloc] initWithFrame:frame];
+            regionView.layer.borderColor = UIColor.redColor.CGColor;
+            regionView.layer.borderWidth = 1.0f;
+            regionView.backgroundColor = UIColor.clearColor;
+            [self.starContainer addSubview:regionView];
         }
     }];
     NSLog(@"loaded regions :%i", self.loadedRegions.count);
@@ -82,17 +90,16 @@
     }];
 }
 
-
 - (CGRect)frameForStar:(FUStar *)star {
     CGFloat originX = star.x + (star.region.x * self.map.regionSize.width);
     CGFloat originY = star.y + (star.region.y * self.map.regionSize.height);
     return CGRectMake(originX, originY, 20, 20);
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
     CGRect convertedRect = [self convertRect:self.bounds toView:self.starContainer];
+    NSLog(@"%@", NSStringFromCGRect(convertedRect));
     [self loadStarsInRect:convertedRect];
 }
 
