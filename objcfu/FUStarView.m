@@ -36,7 +36,7 @@
 
 - (void)setStar:(FUStar *)star {
     _star = star;
-
+    self.backgroundColor = UIColor.greenColor;
 }
 
 
@@ -45,8 +45,8 @@
     self.layer.cornerRadius = MIN(frame.size.height, frame.size.width) / 2.f;
 }
 
-+ (void)reusableStarViewWithStar:(FUStar *)star {
-
++ (instancetype)reusableStarViewWithStar:(FUStar *)star {
+    return nil;
 }
 
 @end

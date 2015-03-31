@@ -12,6 +12,6 @@
 
 @property(nonatomic, strong) FUStar *star;
 
-+ (void) reusableStarViewWithStar:(FUStar *)star;
++ (instancetype) reusableStarViewWithStar:(FUStar *)star;
 
 @end

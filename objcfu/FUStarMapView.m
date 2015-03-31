@@ -46,7 +46,7 @@
         self.starContainer = [[UIView alloc] initWithFrame:universeRect];
         [self addSubview:self.starContainer];
 
-        self.minimumZoomScale = 0.25f;
+        self.minimumZoomScale = 0.05f;
         self.maximumZoomScale = 2.0f;
         self.contentSize = self.map.universe.size;
         self.contentOffset = self.map.universe.center;
@@ -71,21 +71,21 @@
             [self addStars:stars];
             [self.loadedRegions addObject:region];
 
-            CGRect frame = [self.map frameForRegion:region];
-            UIView *regionView = [[UIView alloc] initWithFrame:frame];
-            regionView.layer.borderColor = UIColor.redColor.CGColor;
-            regionView.layer.borderWidth = 1.0f;
-            regionView.backgroundColor = UIColor.clearColor;
-            [self.starContainer addSubview:regionView];
+//            ADD REGION MARKERS
+//            CGRect frame = [self.map frameForRegion:region];
+//            UIView *regionView = [[UIView alloc] initWithFrame:frame];
+//            regionView.layer.borderColor = UIColor.redColor.CGColor;
+//            regionView.layer.borderWidth = 4.0f;
+//            regionView.backgroundColor = UIColor.clearColor;
+//            [self.starContainer addSubview:regionView];
         }
     }];
-    NSLog(@"loaded regions :%i", self.loadedRegions.count);
-    NSLog(@"scale :%f", self.zoomScale);
 }
 
 - (void) addStars:(NSArray *)stars {
     [stars each:^(FUStar *star) {
         FUStarView *starView = [self reusableStarView];
+        starView.star = star;
         starView.frame = [self frameForStar:star];
     }];
 }
@@ -99,7 +99,6 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
     CGRect convertedRect = [self convertRect:self.bounds toView:self.starContainer];
-    NSLog(@"%@", NSStringFromCGRect(convertedRect));
     [self loadStarsInRect:convertedRect];
 }
 
@@ -109,14 +108,13 @@
 
 - (FUStarView *)reusableStarView {
 
-    NSUInteger reusableStarsCount = 1000;
+    NSUInteger reusableStarsCount = 10000;
 
     if(!self.reusableStarViews){
         self.reusableStarViews = NSMutableArray.new;
 
         while (reusableStarsCount--){
             FUStarView *starView = FUStarView.new;
-            starView.backgroundColor = UIColor.greenColor;
             [self.reusableStarViews addObject:starView];
         }
     }
